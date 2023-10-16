@@ -82,10 +82,11 @@ int main()
         string finalText = heading + "\n\n";
         for (int i = 0; i < tasksWithProject.size(); i++)
         {
-
             const TasksWithProject taskWithProject = tasksWithProject[i];
             const string project = "*" + taskWithProject.projectName + "*";
             const vector<string> tasks = taskWithProject.tasks;
+
+            finalText += project + '\n';
 
             cout << project << endl;
             for (int i = 0; i < tasks.size(); i++)
@@ -112,7 +113,7 @@ int main()
 
         cout << endl;
         cout << ending;
-        finalText += "\n\n" + ending;
+        finalText += "\n" + ending;
         copyToClipboard(finalText);
     }
 
