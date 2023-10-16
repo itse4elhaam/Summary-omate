@@ -23,11 +23,12 @@ int main() {
     string heading = "Summary of " + getDate() + ":";
     heading = "*" + heading + "*";
     const string ending = "*CHECKOUT*";
+    string punchWord = "*COMPLETED*";
     bool terminate = false;
 
     vector<TasksWithProject> tasksWithProject;
 
-    cout << endl << "Enter the task list, E to terminate and C to change the project name." << endl << endl;
+    cout << endl << "Enter the task list, start with 'P ' to indicate In progress, E to terminate and C to change the project name." << endl << endl;
 
     while (!terminate) {
         TasksWithProject project;
@@ -76,7 +77,11 @@ int main() {
                 if(task == ""){
                     continue;
                 }
-                cout << "*COMPLETED* " << task << endl;
+                if(task[0] == 'P' & task[1] == ' '){
+                    punchWord = "IN PROGRESS";
+                }
+
+                cout << punchWord << " " << task << endl;
             }
             if (i < tasksWithProject.size()){
                 cout << endl;
