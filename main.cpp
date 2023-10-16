@@ -20,7 +20,6 @@ struct TasksWithProject {
 };
 
 int main() {
-    int i = 0;
     string heading = "Summary of " + getDate() + ":";
     heading = "*" + heading + "*";
     const string ending = "*CHECKOUT*";
@@ -63,7 +62,6 @@ int main() {
     if (!tasksWithProject.empty()) {
         cout << "Generating..." << endl << endl;
 
-        // everything that gets printed from here on should be copied to user's clipboard
         cout << heading;
         cout << endl << endl;
         for (int i = 0; i < tasksWithProject.size(); i++) {
@@ -75,6 +73,9 @@ int main() {
             cout << project << endl;
             for (int i = 0; i < tasks.size(); i++) {
                 const string task = tasks[i];
+                if(task == ""){
+                    continue;
+                }
                 cout << "*COMPLETED* " << task << endl;
             }
             if (i < tasksWithProject.size()){
