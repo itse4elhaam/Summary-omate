@@ -15,6 +15,18 @@ string getDate(){
     return date;
 }
 
+string removeTrailingSpaces(const string &str) {
+    size_t start = str.find_first_not_of(' ');
+    size_t end = str.find_last_not_of(' ');
+
+    if (start == std::string::npos) {
+        // If the string is all spaces
+        return "";
+    }
+
+    return str.substr(start, end - start + 1);
+}
+
 struct TasksWithProject
 {
     string projectName;
@@ -23,6 +35,7 @@ struct TasksWithProject
 
 int main()
 {
+    const vector<string> GUIDELINES = {"Start with 'P ' to indicate In progress", "E to terminate",  "C to change the project name"};
     string heading = "Summary of " + getDate() + ":";
     heading = "*" + heading + "*";
     const string ending = "*CHECKOUT*";
@@ -31,9 +44,13 @@ int main()
 
     vector<TasksWithProject> tasksWithProject;
 
-    cout << endl
-         << "Enter the task list, start with 'P ' to indicate In progress, E to terminate and C to change the project name." << endl
-         << endl;
+    cout << endl;
+    cout << "Guidelines: " << endl;
+    for(int i = 0; i < GUIDELINES.size(); i++){
+        const string guideline = GUIDELINES[i];
+        cout << "- " << guideline << endl;
+    }
+    cout << endl;
 
     while (!terminate)
     {
@@ -83,7 +100,7 @@ int main()
         for (int i = 0; i < tasksWithProject.size(); i++)
         {
             const TasksWithProject taskWithProject = tasksWithProject[i];
-            const string project = "*" + taskWithProject.projectName + "*";
+            string project = '*' + removeTrailingSpaces(taskWithProject.projectName) + ":*";
             const vector<string> tasks = taskWithProject.tasks;
 
             finalText += project + '\n';
