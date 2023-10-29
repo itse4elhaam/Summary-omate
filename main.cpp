@@ -100,7 +100,10 @@ int main()
         for (int i = 0; i < tasksWithProject.size(); i++)
         {
             const TasksWithProject taskWithProject = tasksWithProject[i];
-            string project = '*' + removeTrailingSpaces(taskWithProject.projectName) + ":*";
+            string project = "";
+            if(taskWithProject.projectName != ""){
+                project = '*' + removeTrailingSpaces(taskWithProject.projectName) + ":*";
+            }
             const vector<string> tasks = taskWithProject.tasks;
 
             finalText += project + '\n';
